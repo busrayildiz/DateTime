@@ -1,5 +1,7 @@
 package com.busra.DateTime;
 
+import java.util.Calendar;
+
 public class Time {
     private int m_hour,m_minute, m_second , m_millisecond;
 
@@ -112,5 +114,30 @@ public class Time {
         m_millisecond=millisecond;
     }
 
+    private void set( int hour, int minute , int second , int millisecond){
+        m_hour=hour;
+        m_minute=minute;
+        m_second=second;
+        m_millisecond=millisecond;
+    }
+
+    public Time(){
+        Calendar now = Calendar.getInstance();
+
+        set(now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), now.get(Calendar.SECOND), now.get(Calendar.MILLISECOND));
+    }
+
+    public String toShortTimeString(){
+        return String.format("%02d:%02d" ,m_hour,m_minute);
+    }
+
+
+    public String toString() {
+        return String.format("%s:%02d" , toShortTimeString() , m_second);
+    }
+
+    public String toLongTimeString(){
+        return String.format("%s:%04d" , toString(),m_millisecond);
+    }
 
 }
